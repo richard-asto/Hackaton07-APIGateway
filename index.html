@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>API Gateway Frontend</title>
+</head>
+
+<body>
+
+<h1>API Gateway Demo</h1>
+
+<button onclick="verPokemon()">Ver Pokemon</button>
+<button onclick="verRick()">Ver Rick & Morty</button>
+<button onclick="verDolar()">Tipo de Cambio</button>
+<button onclick="verUsuario()">Usuario Random</button>
+
+<pre id="resultado"></pre>
+
+<script>
+
+const API = "http://localhost:3000/api"
+
+async function verPokemon(){
+
+  const res = await fetch(`${API}/pokemon`)
+  const data = await res.json()
+
+  document.getElementById("resultado").textContent =
+    JSON.stringify(data,null,2)
+
+}
+
+async function verRick(){
+
+  const res = await fetch(`${API}/rickmorty`)
+  const data = await res.json()
+
+  document.getElementById("resultado").textContent =
+    JSON.stringify(data,null,2)
+
+}
+
+
+
+async function verUsuario(){
+
+  const res = await fetch(`${API}/usuario`)
+  const data = await res.json()
+
+  document.getElementById("resultado").textContent =
+    JSON.stringify(data,null,2)
+
+}
+async function verDolar(){
+
+  const res = await fetch("http://localhost:3000/api/dolar")
+  const data = await res.json()
+
+  document.getElementById("resultado").innerHTML =
+  `
+  Moneda base: ${data.data.base}
+
+  PEN: ${data.data.rates.PEN}
+  `
+
+}
+
+
+</script>
+
+</body>
+</html>
